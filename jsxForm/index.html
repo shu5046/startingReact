@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>React App</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      let customers = [];
+      const capacity = 25;
+      let seatsLeft = 25;
+
+      const del = (index) => {
+        customers = customers.filter((_, i) => i !== index);
+        rootElement.render(<App />);
+      };
+      // Create form submit handler here
+      function handleSubmit(event) {
+        event.preventDefault();
+
+        // Get input values from the form
+        const count = event.target[0].value;
+        const name = event.target[1].value;
+        const phone = event.target[2].value;
+        const time = new Date().toLocaleTimeString();
+
+        customers.push({ count, name, phone, time });
+        let seatsTaken = 0;
+        customers.forEach((i) => {
+          seatsTaken += parseInt(i.count);
+        });
+        if (seatsTaken > capacity) {
+          alert("Not enough seats available!");
+          return;
+        }
+        seatsLeft = capacity - seatsTaken;
+
+        rootElement.render(<App />);
+      }
+
+      const App = () => (
+        <div className="App" style={{ textAlign: "center" }}>
+          <div>
+            <h2>Total Capacity:{capacity} </h2>
+            <h2>Seats Left: {seatsLeft}</h2>
+          </div>
+
+          {/* Create a form here for the input count, name and phone number with a submit button*/}
+          <form onSubmit={handleSubmit}>
+            <input type="number" placeholder="Guest Count" />
+            <input type="text" placeholder="Primary guest name" />
+            <input type="text" placeholder="Phone number" />
+            <button type="submit">Add Entry</button>
+          </form>
+          <table border="1px" style={{ margin: "auto" }}>
+            <thead>
+              <tr>
+                <th>Count</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Check In</th>
+                <th>Remove Entry</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* Complete table to show records of customers */}
+
+              {customers.map((i, index) => (
+                <>
+                  <tr key={index}>
+                    <td>{i.count}</td>
+                    <td>{i.name}</td>
+                    <td>{i.phone}</td>
+                    <td>{i.time}</td>
+                    <td>
+                      <button
+                        onClick={() => {
+                          del(index);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                </>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+
+      const rootElement = ReactDOM.createRoot(document.getElementById("root"));
+      rootElement.render(<App />);
+    </script>
+  </body>
+</html>

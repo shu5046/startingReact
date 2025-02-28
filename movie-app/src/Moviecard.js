@@ -1,45 +1,13 @@
 import React from "react";
 class MovieCard extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      title: "The Avengers",
-      plot: "Action movie ",
-      price: 199,
-      rating: 8.9,
-      stars: 0,
-    };
-  }
-  removeStars = ()=>{
-    this.setState((ps)=>{
-        return {
-           stars : ps.stars-0.5,
-        }
-    })
-  }
-  addStars = () => {
-    //form1
-    // this.setState({
-    //   stars: this.state.stars + 0.5,
-    // });
-
-    //Second form
-    this.setState((prevState)=>{
-        return{
-            stars: prevState.stars+0.5,
-        }
-    })
-  };
   render() {
-    const { title, plot, price, rating, stars } = this.state;
+    const { title, plot, poster, price, rating, star, fav, isInCart } =
+      this.props.movies;
     return (
       <div className="main">
         <div className="movie-card">
           <div className="left">
-            <img
-              src="https://i.pinimg.com/736x/b1/c4/3e/b1c43e26432f232acbfdc52726a1ae83.jpg"
-              alt="Poster"
-            ></img>
+            <img src={poster} alt="Poster"></img>
           </div>
           <div className="right">
             <div className="title">{title}</div>
@@ -51,7 +19,9 @@ class MovieCard extends React.Component {
                 <img
                   className="str-btn"
                   src="https://cdn-icons-png.flaticon.com/128/9146/9146915.png"
-                  onClick={this.removeStars}
+                  onClick={() => {
+                    this.props.removeStar(this.props.movies);
+                  }}
                 />
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png"
@@ -60,13 +30,28 @@ class MovieCard extends React.Component {
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/3524/3524388.png"
                   className="str-btn"
-                  onClick={this.addStars}
+                  onClick={() => {
+                    this.props.addStars(this.props.movies);
+                  }}
                 />
-                <span>{stars}</span>
+                <span>{star}</span>
               </div>
-
-              <button className="fav-btn">Favourite</button>
-              <button className="cart-btn">Add to cart</button>
+              <button
+                className={fav ? "unfav-btn" : "fav-btn"}
+                onClick={() => {
+                  this.props.handleFav(this.props.movies);
+                }}
+              >
+                {fav ? "Un-favourite" : "Favourite"}
+              </button>
+              <button
+                className={isInCart ? "uncart-btn" : "cart-btn"}
+                onClick={() => {
+                  this.props.handleCart(this.props.movies);
+                }}
+              >
+                {isInCart ? "Remove from cart" : "Add to cart"}
+              </button>
             </div>
           </div>
         </div>

@@ -1,0 +1,183 @@
+/* === Base Reset === */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* === 3-Column Layout === */
+.app-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.left-column,
+.middle-column,
+.right-column {
+  flex: 1;
+}
+
+/* Slightly widen the form column */
+.middle-column {
+  flex: 1.2;
+}
+
+/* === Balance Headline === */
+#balance {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.25rem 0 1.25rem;
+  color: #333;
+}
+
+/* === Income–Expense Summary === */
+.inc-exp-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.inc-exp-container > div {
+  flex: 1;
+  padding: 1rem;
+  text-align: center;
+}
+
+.inc-exp-container > div:first-child {
+  border-right: 1px solid #f0f0f0;
+}
+
+.inc-exp-container h4 {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555;
+}
+
+#income p {
+  color: #2ecc71;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+#expense p {
+  color: #e74c3c;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* === Transaction History List === */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.list li {
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  border-right: 5px solid transparent;
+}
+
+/* Income vs Expense coloring */
+.list li.plus {
+  border-right-color: #2ecc71;
+}
+
+.list li.minus {
+  border-right-color: #e74c3c;
+}
+
+/* Align transaction text and amount */
+.list li span {
+  margin-left: auto;
+  font-weight: 600;
+}
+
+/* === Delete Button === */
+.del-btn {
+  margin-left: 0.75rem;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background: #e74c3c;
+  color: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.2s;
+}
+
+.del-btn:hover {
+  filter: brightness(0.9);
+}
+
+/* === Add Transaction Form === */
+.form-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1.25rem 0;
+}
+
+.form-control label {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.form-control input {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.form-control input:focus {
+  outline: none;
+  border-color: #2ecc71;
+  box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.2);
+}
+
+.form-control button {
+  padding: 0.65rem 1rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  background: #2ecc71;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.header{
+  text-align: center;
+}
+.form-control button:hover {
+  opacity: 0.9;
+}
+
+/* === Responsive Stacking (optional) === */
+@media (max-width: 768px) {
+  .app-layout {
+    flex-direction: column;
+  }
+}
